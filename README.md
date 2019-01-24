@@ -1,1 +1,2 @@
-# java_2018_12
+# Student
+Eugene Kari (user36235@otus-student.ru)
