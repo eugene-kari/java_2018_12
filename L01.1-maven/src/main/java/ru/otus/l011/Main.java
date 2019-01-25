@@ -29,7 +29,7 @@ public class Main {
     private static final int MEASURE_COUNT = 1;
 
     public static void main(String... args) {
-        Collection<Integer> example = new ArrayList<>();
+        List<Integer> example = new ArrayList<>();
         int min = 0;
         int max = 999_999;
         for (int i = min; i < max + 1; i++) {
@@ -37,8 +37,10 @@ public class Main {
         }
 
         List<Integer> result = new ArrayList<>();
-        Collections.shuffle((List<Integer>)example);
-        calcTime(() -> result.addAll(Lists.reverse((List<Integer>)example)));
+        Collections.shuffle(example);
+        result.addAll(Lists.reverse(example));
+//        calcTime(result);
+        calcTime(() -> result.addAll(Lists.reverse(example)));
     }
 
     private static void calcTime(Runnable runnable) {

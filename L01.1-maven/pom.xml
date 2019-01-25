@@ -41,6 +41,11 @@
             <artifactId>guava</artifactId>
             <version>23.0</version>
         </dependency>
+        <!--dependency>
+            <groupId>net.sf.proguard</groupId>
+            <artifactId>proguard-base</artifactId>
+            <version>6.1.0beta2</version>
+        </dependency-->
     </dependencies>
 
 
@@ -48,7 +53,6 @@
         <finalName>${project.name}</finalName>
 
         <plugins>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -93,7 +97,43 @@
                     </archive>
                 </configuration>
             </plugin>
-    
+
+            <plugin>
+                <groupId>com.github.wvengen</groupId>
+                <artifactId>proguard-maven-plugin</artifactId>
+                <version>2.0.14</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>proguard</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <proguardVersion>6.1.0beta2</proguardVersion>
+                    <obfuscate>true</obfuscate>
+                    <options>
+                        <!--option>-allowaccessmodification</option-->
+                        <option>-dontwarn</option>
+                        <option>-keep public class ru.otus.l011.Main {public static void main(java.lang.String[]);}</option>
+                    </options>
+                    <!--libs>
+                        <lib>${java.home}/lib/jrt-fs.jar</lib>
+                    </libs-->
+                    <injar>l01.1-maven-jar-with-dependencies.jar</injar>
+                    <outjar>l01.1-obfuscate.jar</outjar>
+
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>net.sf.proguard</groupId>
+                        <artifactId>proguard-base</artifactId>
+                        <version>6.1.0beta2</version>
+                    </dependency>
+                </dependencies>
+
+            </plugin>
         </plugins>
 
     </build>
