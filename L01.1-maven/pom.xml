@@ -23,59 +23,29 @@
     <version>2018-12</version>
 
     <properties>
-        <project.name>l01.1-maven</project.name>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>10</maven.compiler.source>
+        <maven.compiler.target>10</maven.compiler.target>
+        <maven.assembly.plugin.version>3.1.0</maven.assembly.plugin.version>
         <com.google.guava.version>23.0</com.google.guava.version>
+        <proguard.version>6.0.2</proguard.version>
     </properties>
 
     <dependencies>
-        <!--dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>2.6</version>
-        </dependency-->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>23.0</version>
+            <version>${com.google.guava.version}</version>
         </dependency>
-        <!--dependency>
-            <groupId>net.sf.proguard</groupId>
-            <artifactId>proguard-base</artifactId>
-            <version>6.1.0beta2</version>
-        </dependency-->
     </dependencies>
-
 
     <build>
         <finalName>${project.name}</finalName>
 
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.1.1</version>
-                <executions>
-                    <execution>
-                        <id>default-jar</id>
-                        <phase>none</phase>
-                    </execution>
-                </executions>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>ru.otus.l011.Main</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>${maven.assembly.plugin.version}</version>
                 <executions>
                     <execution>
                         <id>my-maven-assembly-plugin</id>
@@ -86,7 +56,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <appendAssemblyId>true</appendAssemblyId>
+                    <appendAssemblyId>false</appendAssemblyId>
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
@@ -102,41 +72,34 @@
                 <groupId>com.github.wvengen</groupId>
                 <artifactId>proguard-maven-plugin</artifactId>
                 <version>2.0.14</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>proguard</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <proguardVersion>6.1.0beta2</proguardVersion>
-                    <obfuscate>true</obfuscate>
-                    <options>
-                        <!--option>-allowaccessmodification</option-->
-                        <option>-dontwarn</option>
-                        <option>-keep public class ru.otus.l011.Main {public static void main(java.lang.String[]);}</option>
-                    </options>
-                    <!--libs>
-                        <lib>${java.home}/lib/jrt-fs.jar</lib>
-                    </libs-->
-                    <injar>l01.1-maven-jar-with-dependencies.jar</injar>
-                    <outjar>l01.1-obfuscate.jar</outjar>
-
-                </configuration>
                 <dependencies>
                     <dependency>
                         <groupId>net.sf.proguard</groupId>
                         <artifactId>proguard-base</artifactId>
-                        <version>6.1.0beta2</version>
+                        <version>6.0.2</version>
                     </dependency>
                 </dependencies>
-
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals><goal>proguard</goal></goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <proguardVersion>6.0.2</proguardVersion>
+                    <obfuscate>true</obfuscate>
+                    <injar>${project.name}.jar</injar>
+                    <outjar>${project.name}-obfuscate.jar</outjar>
+                    <outputDirectory>${project.build.directory}</outputDirectory>
+                    <options>
+                        <option>-keep public class ru.otus.l011.Main {public static void main(java.lang.String[]);}</option>
+                        <option>-dontwarn</option>
+                    </options>
+                    <libs>
+                        <lib>./proguard/java.base.jmod</lib>
+                    </libs>
+                </configuration>
             </plugin>
         </plugins>
-
     </build>
-
-
 </project>
