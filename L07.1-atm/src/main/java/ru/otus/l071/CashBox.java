@@ -1,22 +1,21 @@
 package ru.otus.l071;
 
 public class CashBox {
-    public Banknote banknote;
-    public int count;
-    public int capacity;
+    private Banknote banknote;
+    private int count;
+    private int capacity = 1000;
 
     CashBox(Banknote banknote) {
         this.banknote = banknote;
-        capacity = 1000;
     }
 
     public void push(int count) {
-        if (this.count + count > capacity) throw new RuntimeException("No place for count=" + count);
+        if (this.count + count > capacity) throw new RuntimeException("No place for banknotes");
         this.count += count;
     }
 
     public void pop(int count) {
-        if (this.count < count) throw new RuntimeException("No banknote count=" + count);
+        if (this.count < count) throw new RuntimeException("No banknotes");
         this.count -= count;
     }
 
