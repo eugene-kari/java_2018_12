@@ -1,8 +1,8 @@
 package ru.otus.l071;
 
 public enum Currency {
-    RUB("р."),
-    USD("$");
+    RUB("RUB"),
+    USD("USD");
 
     private String name;
 

@@ -1,7 +1,6 @@
 package ru.otus.l071;
 
 public enum Banknote {
-    RUB5(Currency.RUB, 5),
     RUB10(Currency.RUB, 10),
     RUB50(Currency.RUB, 50),
     RUB100(Currency.RUB, 100),
@@ -37,6 +36,6 @@ public enum Banknote {
 
     @Override
     public String toString() {
-        return value + currency.toString();
+        return currency.toString() + value;
     }
 }

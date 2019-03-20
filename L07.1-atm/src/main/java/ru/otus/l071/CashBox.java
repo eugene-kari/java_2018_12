@@ -3,7 +3,7 @@ package ru.otus.l071;
 public class CashBox {
     private Banknote banknote;
     private int count;
-    private int capacity = 1000;
+    private int capacity = 500;
 
     CashBox(Banknote banknote) {
         this.banknote = banknote;

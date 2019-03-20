@@ -5,35 +5,45 @@ import java.util.Map;
 public class Main {
 
     public static void main(String... args) {
+        Map<Banknote, Integer> result;
+
         ATM atm = new ATM();
-        atm.cashIn(Banknote.RUB200, 100);
-        atm.cashIn(Banknote.RUB500, 100);
+
+        //Первичная загрузка банкнот
+        System.out.println("=== init ===");
+        atm.cashIn(Banknote.RUB100, 100);
+        atm.cashIn(Banknote.RUB500, 10);
         atm.cashIn(Banknote.RUB1000, 5);
         atm.cashIn(Banknote.USD10, 100);
-        atm.cashIn(Banknote.USD100, 1);
-
-        System.out.println(atm.getRemainder());
-        System.out.println("------------------");
-        Map<Banknote, Integer> result = atm.cashOut(Currency.RUB, 5200);
-        System.out.println(result);
-        System.out.println(atm.getRemainder());
-
-        Map<Banknote, Integer> result1 = atm.cashOut(Currency.RUB, 5100);
-        System.out.println(result1);
-        System.out.println(atm.getRemainder());
-
-        Map<Banknote, Integer> result2 = atm.cashOut(Currency.RUB, 200);
-        System.out.println(result2);
-        System.out.println(atm.getRemainder());
-
-        Map<Banknote, Integer> result3 = atm.cashOut(Currency.RUB, 600);
-        System.out.println(result3);
-        System.out.println(atm.getRemainder());
-
-        Map<Banknote, Integer> result4 = atm.cashOut(Currency.USD, 220);
-        System.out.println(result4);
-        System.out.println(atm.getRemainder());
-
+        atm.cashIn(Banknote.USD100, 10);
+        atm.getBalance().forEach((k, v) -> System.out.println(k + "=" + v));
+        //
+        System.out.println("=== cashOut(RUB5500) ===");
+        result = atm.cashOut(Currency.RUB, 5500);
+        result.forEach((k, v) -> System.out.println(v + " x " + k));
+        System.out.println("=== balance ===");
+        atm.getBalance().forEach((k, v) -> System.out.println(k + "=" + v));
+        //
+        System.out.println("=== cashOut(USD350) ===");
+        result = atm.cashOut(Currency.USD, 350);
+        result.forEach((k, v) -> System.out.println(v + " x " + k));
+        System.out.println("=== balance ===");
+        atm.getBalance().forEach((k, v) -> System.out.println(k + "=" + v));
+        //
+        System.out.println("=== cashIn(RUB800) ===");
+        atm.cashIn(Banknote.RUB100, 8);
+        System.out.println("=== balance ===");
+        atm.getBalance().forEach((k, v) -> System.out.println(k + "=" + v));
+        //
+        System.out.println("=== cashIn(USD50) ===");
+        atm.cashIn(Banknote.USD10, 5);
+        System.out.println("=== balance ===");
+        atm.getBalance().forEach((k, v) -> System.out.println(k + "=" + v));
+        //
+        System.out.println("=== cashOut(RUB20000) ===");
+        result = atm.cashOut(Currency.RUB, 20000);
+        result.forEach((k, v) -> System.out.println(v + " x " + k));
+        System.out.println("=== balance ===");
+        atm.getBalance().forEach((k, v) -> System.out.println(k + "=" + v));
     }
-
 }
