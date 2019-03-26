@@ -4,9 +4,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <developers>
+        <developer>
+            <name>Jim</name>
+        </developer>
+    </developers>
+
+    <name>L031</name>
+
     <groupId>ru.otus</groupId>
-    <artifactId>L07.1-atm</artifactId>
-    <version>2018-12</version>
+    <artifactId>L03.1-generic-collections</artifactId>
+    <version>1.0-SNAPSHOT</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -18,17 +26,18 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>${com.google.guava.version}</version>
+            <version>24.0-jre</version>
         </dependency>
     </dependencies-->
 
     <build>
         <finalName>${project.name}</finalName>
 
-        <!--plugins>
+        <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>${maven.assembly.plugin.version}</version>
+                <version>3.1.1</version>
                 <executions>
                     <execution>
                         <id>my-maven-assembly-plugin</id>
@@ -45,12 +54,12 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>ru.otus.l071.Main</mainClass>
+                            <mainClass>ru.otus.l031.ru.otus.l081.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
             </plugin>
-        </plugins-->
+        </plugins>
     </build>
 
 </project>
