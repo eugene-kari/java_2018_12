@@ -1,7 +1,6 @@
 package ru.otus.l041;
 
 import com.sun.management.GarbageCollectionNotificationInfo;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,34 +10,8 @@ import javax.management.NotificationListener;
 import java.lang.management.GarbageCollectorMXBean;
 
 public class Benchmark implements BenchmarkMBean {
-    private static ArrayList<String> arrayList = new ArrayList<>();
-    private int size = 0;
-
     public static Map<String, Long> totalTimes = new HashMap<>();
     public static Map<String, Long> totalRuns = new HashMap<>();
-
-    void run() throws InterruptedException {
-        while (true) {
-            for (int i = 0; i < this.size; i++) {
-                arrayList.add("abcdefghijklmnopqrstuvwxyz0123456789");
-            }
-            int currentArraySize = arrayList.size();
-            for (int i = 1; i < Math.round(this.size / 2); i++) {
-                arrayList.remove(currentArraySize - i);
-            }
-            Thread.sleep(1);
-        }
-    }
-
-    @Override
-    public int getSize() {
-        return this.size;
-    }
-
-    @Override
-    public void setSize(final int size) {
-        this.size = size;
-    }
 
     @Override
     public void subscribeToGcEvents() {
